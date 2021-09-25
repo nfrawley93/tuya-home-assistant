@@ -128,6 +128,7 @@ class TuyaHaLight(TuyaHaDevice, LightEntity):
         self.dp_code_bright = DPCODE_BRIGHT_VALUE
         self.dp_code_temp = DPCODE_TEMP_VALUE
         self.dp_code_colour = DPCODE_COLOUR_DATA
+        self.dp_code = DPCODE_SWITCH
 
         for key in device.function:
             if key.startswith(DPCODE_BRIGHT_VALUE):
@@ -136,13 +137,15 @@ class TuyaHaLight(TuyaHaDevice, LightEntity):
                 self.dp_code_temp = key
             elif key.startswith(DPCODE_COLOUR_DATA):
                 self.dp_code_colour = key
+            elif key.starswith(DPCODE_LIGHT):
+                self.dp_code = key
 
         super().__init__(device, device_manager)
 
     @property
     def is_on(self) -> bool:
         """Return true if light is on."""
-        return self.tuya_device.status.get(DPCODE_SWITCH, False)
+        return self.tuya_device.status.get(self.dp_code, False)
 
     def turn_on(self, **kwargs: Any) -> None:
         """Turn on or control the light."""
