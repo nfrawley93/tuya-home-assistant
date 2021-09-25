@@ -137,7 +137,7 @@ class TuyaHaLight(TuyaHaDevice, LightEntity):
                 self.dp_code_temp = key
             elif key.startswith(DPCODE_COLOUR_DATA):
                 self.dp_code_colour = key
-            elif key.starswith(DPCODE_LIGHT):
+            elif key.startswith(DPCODE_LIGHT):
                 self.dp_code = key
 
         super().__init__(device, device_manager)
