@@ -241,7 +241,6 @@ class TuyaHaLight(TuyaHaDevice, LightEntity):
         """Instruct the light to turn off."""
         if (
             DPCODE_LIGHT in self.tuya_device.status
-            and DPCODE_SWITCH not in self.tuya_device.status
         ):
             commands = [{"code": DPCODE_LIGHT, "value": False}]
         else:
